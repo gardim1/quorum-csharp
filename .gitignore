@@ -1,0 +1,17 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/TestResults/
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/*.sqlite
+**/*.log
+.env
+.env.*
+!.env.example
+*.user
+*.suo

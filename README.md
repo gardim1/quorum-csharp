@@ -2,9 +2,30 @@
 
 API acadêmica em C# para acompanhar a demanda de uma unidade consumidora e simular quanto de potência pode ser reservado aos seus carregadores de veículos elétricos. A simulação usa dados fictícios em kW. A futura integração OCPP é o ponto em que os valores poderiam ser traduzidos em perfis de carregamento para equipamentos reais.
 
+## Equipe
+
+| Integrante | RM |
+|---|---|
+| Vinicius Gardim | 556013 |
+| Fabiano Zague | 555524 |
+| Pedro Certo | 556268 |
+| Lorran dos Santos | 558982 |
+
+## Contexto e entregas
+
+Este é o backend C# da Quorum, desenvolvido para a Global Solution CitizenTech FIAP 2026. O cenário é um condomínio fictício; a definição de cidade/bairro e a validação com cidadãos continuam pendentes.
+
+- [Contexto, ODS e fontes](docs/CONTEXTO.md)
+- [Conferência dos requisitos](docs/REQUISITOS.md)
+- [Sequência de demonstração](docs/DEMONSTRACAO.md)
+- [Registro de uso de IA](prompts.md)
+- [Projeto de Cybersecurity](https://github.com/gardim1/quorum-cybersecurity)
+
+O outro repositório contém `demonstrar_integracao.py`, que lê esta API e audita a exportação da telemetria. Os projetos devem estar rodando nas portas indicadas nos respectivos READMEs.
+
 ## Executar localmente
 
-Com o SDK .NET 9, execute na pasta `csharp`:
+Com o SDK .NET 9, execute na raiz deste repositório:
 
 ```sh
 dotnet restore Quorum.sln
