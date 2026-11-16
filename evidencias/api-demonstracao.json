@@ -1,0 +1,178 @@
+{
+  "executado_em": "2026-11-16T22:51:59.165178+00:00",
+  "verificacoes": [
+    {
+      "metodo": "POST",
+      "rota": "/api/unidades",
+      "status": 201,
+      "resposta": {
+        "id": 2,
+        "nome": "Local fictício de verificação",
+        "limiteDemandaKw": 50
+      }
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/unidades/2/carregadores",
+      "status": 201,
+      "resposta": {
+        "id": 3,
+        "unidadeConsumidoraId": 2,
+        "nome": "Carregador A",
+        "potenciaMaximaKw": 11,
+        "disponivel": true
+      }
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/unidades/2/carregadores",
+      "status": 201,
+      "resposta": {
+        "id": 4,
+        "unidadeConsumidoraId": 2,
+        "nome": "Carregador B",
+        "potenciaMaximaKw": 22,
+        "disponivel": true
+      }
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/unidades/2/medicoes",
+      "status": 201,
+      "resposta": {
+        "id": 2,
+        "unidadeConsumidoraId": 2,
+        "demandaBaseKw": 32,
+        "registradaEm": "2026-11-16T22:51:58.85104Z"
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/unidades/2/plano-carregamento",
+      "status": 200,
+      "resposta": {
+        "unidadeConsumidoraId": 2,
+        "medicaoId": 2,
+        "registradaEm": "2026-11-16T22:51:58.85104Z",
+        "limiteDemandaKw": 50.0,
+        "demandaBaseKw": 32.0,
+        "folgaKw": 18.0,
+        "potenciaAlocadaKw": 18.0,
+        "excedeLimite": false,
+        "carregadores": [
+          {
+            "carregadorId": 3,
+            "nome": "Carregador A",
+            "disponivel": true,
+            "potenciaMaximaKw": 11.0,
+            "potenciaAlocadaKw": 11.0
+          },
+          {
+            "carregadorId": 4,
+            "nome": "Carregador B",
+            "disponivel": true,
+            "potenciaMaximaKw": 22.0,
+            "potenciaAlocadaKw": 7.0
+          }
+        ]
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/unidades/2/medicoes",
+      "status": 200,
+      "resposta": {
+        "quantidade": 1,
+        "mediaKw": 32,
+        "maximaKw": 32.0,
+        "medicoes": [
+          {
+            "id": 2,
+            "unidadeConsumidoraId": 2,
+            "demandaBaseKw": 32.0,
+            "registradaEm": "2026-11-16T22:51:58.85104Z"
+          }
+        ]
+      }
+    },
+    {
+      "metodo": "PUT",
+      "rota": "/api/unidades/2/carregadores/3",
+      "status": 204,
+      "resposta": ""
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/unidades/2/plano-carregamento",
+      "status": 200,
+      "resposta": {
+        "unidadeConsumidoraId": 2,
+        "medicaoId": 2,
+        "registradaEm": "2026-11-16T22:51:58.85104Z",
+        "limiteDemandaKw": 50.0,
+        "demandaBaseKw": 32.0,
+        "folgaKw": 18.0,
+        "potenciaAlocadaKw": 18.0,
+        "excedeLimite": false,
+        "carregadores": [
+          {
+            "carregadorId": 3,
+            "nome": "Carregador A",
+            "disponivel": false,
+            "potenciaMaximaKw": 11.0,
+            "potenciaAlocadaKw": 0
+          },
+          {
+            "carregadorId": 4,
+            "nome": "Carregador B",
+            "disponivel": true,
+            "potenciaMaximaKw": 22.0,
+            "potenciaAlocadaKw": 18.0
+          }
+        ]
+      }
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/unidades/2/medicoes",
+      "status": 400,
+      "resposta": {
+        "title": "Verifique os campos da solicitação.",
+        "status": 400,
+        "errors": {
+          "DemandaBaseKw": [
+            "A demanda base deve ser maior ou igual a zero."
+          ]
+        }
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/unidades/2/medicoes?inicio=2026-11-19T00:00:00Z&fim=2026-11-16T00:00:00Z",
+      "status": 400,
+      "resposta": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+        "title": "A data inicial deve ser anterior ou igual à data final.",
+        "status": 400,
+        "traceId": "00-bffc993cbdba74f263e5ee25f73e60ec-30e2c03bd7b05243-00"
+      }
+    },
+    {
+      "metodo": "DELETE",
+      "rota": "/api/unidades/2",
+      "status": 204,
+      "resposta": ""
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/unidades/2",
+      "status": 404,
+      "resposta": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+        "title": "Not Found",
+        "status": 404,
+        "traceId": "00-d8a919ed4079df5ebafc2c9e3cc3f3fd-60138459210d496d-00"
+      }
+    }
+  ]
+}

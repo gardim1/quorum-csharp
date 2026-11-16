@@ -1,0 +1,85 @@
+@host = http://localhost:5080
+
+# Atualize estes IDs com as respostas de criação abaixo antes das requisições de teste.
+@unidadeId = 2
+@carregadorId = 3
+
+### Unidades cadastradas
+GET {{host}}/api/unidades
+
+### Plano da demonstração, com 11 kW e 7 kW num banco recém-criado
+GET {{host}}/api/unidades/1/plano-carregamento
+
+### Histórico da demonstração por período inclusivo
+GET {{host}}/api/unidades/1/medicoes?inicio=2026-11-15T00:00:00Z&fim=2026-11-15T23:59:59Z
+
+### Criar uma unidade de teste
+POST {{host}}/api/unidades
+Content-Type: application/json
+
+{
+  "nome": "Unidade de teste",
+  "limiteDemandaKw": 50
+}
+
+### Consultar a unidade de teste
+GET {{host}}/api/unidades/{{unidadeId}}
+
+### Cadastrar carregador de 22 kW na unidade de teste
+POST {{host}}/api/unidades/{{unidadeId}}/carregadores
+Content-Type: application/json
+
+{
+  "nome": "Carregador de teste",
+  "potenciaMaximaKw": 22,
+  "disponivel": true
+}
+
+### Listar os carregadores da unidade
+GET {{host}}/api/unidades/{{unidadeId}}/carregadores
+
+### Consultar o carregador criado
+GET {{host}}/api/unidades/{{unidadeId}}/carregadores/{{carregadorId}}
+
+### Sem medição na unidade de teste, o plano retorna 409
+GET {{host}}/api/unidades/{{unidadeId}}/plano-carregamento
+
+### Registrar 32 kW de demanda base na unidade de teste
+POST {{host}}/api/unidades/{{unidadeId}}/medicoes
+Content-Type: application/json
+
+{
+  "demandaBaseKw": 32,
+  "registradaEm": "2026-11-16T12:00:00Z"
+}
+
+### Plano da unidade de teste, com 18 kW propostos para o carregador
+GET {{host}}/api/unidades/{{unidadeId}}/plano-carregamento
+
+### Alterar o limite da unidade de teste
+PUT {{host}}/api/unidades/{{unidadeId}}
+Content-Type: application/json
+
+{
+  "nome": "Unidade de teste",
+  "limiteDemandaKw": 48
+}
+
+### Alterar disponibilidade do carregador
+PUT {{host}}/api/unidades/{{unidadeId}}/carregadores/{{carregadorId}}
+Content-Type: application/json
+
+{
+  "nome": "Carregador de teste",
+  "potenciaMaximaKw": 22,
+  "disponivel": false
+}
+
+### Período invertido retorna 400
+GET {{host}}/api/unidades/{{unidadeId}}/medicoes?inicio=2026-11-17T00:00:00Z&fim=2026-11-16T00:00:00Z
+
+### Excluir o carregador de teste
+DELETE {{host}}/api/unidades/{{unidadeId}}/carregadores/{{carregadorId}}
+
+### Excluir a unidade de teste e o histórico vinculado
+DELETE {{host}}/api/unidades/{{unidadeId}}

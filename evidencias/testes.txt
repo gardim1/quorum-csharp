@@ -1,0 +1,5 @@
+Verificação local em 16/11/2026.
+Comando: dotnet test Quorum.sln --configuration Release --nologo --verbosity minimal
+Resultado observado: Com falha: 0, Aprovado: 16, Ignorado: 0, Total: 16.
+O comando compilou os projetos Quorum.Api e Quorum.Tests antes da execução.
+Os testes HTTP usam SQLite temporário real, incluindo reabertura para confirmar persistência.
